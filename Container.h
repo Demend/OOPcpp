@@ -11,7 +11,7 @@ public:
     Container() : first(NULL), last(NULL), count(0), iterator(NULL)
     {}
 
-	Container(const Container<T> & other): first(NULL), last(NULL), count(0)
+    Container(const Container<T> & other): first(NULL), last(NULL), count(0)
     {
         for(int i = 0; i < other.GetCount(); ++i)
         {
@@ -21,7 +21,7 @@ public:
 
     ~Container()
     {
-        ClearList();
+        Clear();
     }
 
     void AddFirst(T const &value)
@@ -33,9 +33,9 @@ public:
         ++count;
     }
 
-	void AddLast(T const &value)
+    void AddLast(T const &value)
     {
-		Element * node = new Element<T>(value);
+        Element * node = new Element<T>(value);
         if (count == 0)
         {
             first = node;   
@@ -44,36 +44,36 @@ public:
         {
             last->next = node;
         }
-		last = node;
+        last = node;
         ++count;
     }
 
     void DeleteFirst()
     {
-		if (IsEmpty())
-			return;
+        if (IsEmpty())
+            return;
 
         Element * temp = first;
         first = first->next;
         delete temp;
 
-		if (count == 1)
-			last = NULL;
+        if (count == 1)
+            last = NULL;
 
         --count;
     }
 
     void DeleteLast()
     {
-		if (IsEmpty())
-			return;
+        if (IsEmpty())
+            return;
 
-		if (count == 1)
+        if (count == 1)
         {
             delete last;
-			last = NULL;
+            last = NULL;
             first = NULL;
-		}
+        }
         else
         {
             Element *temp = first;
@@ -81,7 +81,7 @@ public:
                 temp = temp->next; 
 
             delete last;
-			last = temp;
+            last = temp;
             last->next = NULL;
         } 
         --count;
@@ -110,10 +110,10 @@ public:
     void PrintContainer()
     {
         if (IsEmpty())
-		{
+        {
             std::cout << "List is empty" <<    std::endl;
-			return;
-		}
+            return;
+        }
         Element *temp = first;
         while (temp != NULL)
         {
@@ -122,7 +122,7 @@ public:
         }
     }
 
-    void ClearList()
+    void Clear()
     {
         if (IsEmpty())
             return;
@@ -137,29 +137,29 @@ public:
         count = 0;
     }
 
-	void IteratorInitial() 
-	{ 
-		iterator = first; 
-	}
+    void IteratorInitial() 
+    { 
+        iterator = first; 
+    }
 
-	T IteratorGetValue() const 
-	{ 
-		return iterator->value;
-	}
+    T IteratorGetValue() const 
+    { 
+        return iterator->value;
+    }
 
-	void IteratorToNext() 
-	{ 
-		if (iterator != NULL)
-			iterator = iterator->next; 
-	}
+    void IteratorToNext() 
+    { 
+        if (iterator != NULL)
+            iterator = iterator->next; 
+    }
 
-	bool IteratorIsEnd() const 
-	{
-		return (iterator == NULL) ? true : false;
-	}
+    bool IteratorIsEnd() const 
+    {
+        return (iterator == NULL) ? true : false;
+    }
 
 private:
-	struct Element
+    struct Element
     {
         Element(T const &val, Element *nxt = NULL) : value(val), next(nxt) {}
         T value;
@@ -168,7 +168,7 @@ private:
 
     Element * first;
     Element * last;
-	Element * iterator;
+    Element * iterator;
 
     int count;
 };
